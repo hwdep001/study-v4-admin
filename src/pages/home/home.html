@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Home</h3>
+
+  <button ion-button block (click)="clickSignOutBtn()" >SIGN OUT</button>
+  
+    <ion-item *ngIf="user != null">
+      <div>uid : {{user.uid}}</div>
+      <div>email : {{user.email}}</div>
+      <div>displayName : {{user.displayName}}</div>
+      <div>photoURL : {{user.photoURL}}</div>
+      <div>createDate : {{user.createDate}}</div>
+      <div>lastDate : {{user.lastDate}}</div>
+      <div>isAuth : {{user.isAuth}}</div>
+      <div>isDel : {{user.isDel}}</div>
+    </ion-item>
+</ion-content>
