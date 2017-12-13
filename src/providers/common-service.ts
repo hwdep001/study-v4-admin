@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 import { User } from '../models/User';
+import { Loading } from 'ionic-angular/components/loading/loading';
 
 @Injectable()
 export class CommonService {
@@ -62,7 +63,7 @@ export class CommonService {
         this.user_.isDel = user.isDel;
     }
 
-    getLoader(spinner: string, content: string, duration?: number, dismissOnPageChange?: boolean) {
+    getLoader(spinner: string, content: string, duration?: number, dismissOnPageChange?: boolean): Loading {
         spinner = spinner ? spinner : "bubbles";
         content = content ? content : "Please wait...";
         duration = duration ? duration : 15000;
@@ -74,5 +75,5 @@ export class CommonService {
           duration: duration,
           dismissOnPageChange: dismissOnPageChange
         });
-      }
+    }
 }

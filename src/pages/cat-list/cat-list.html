@@ -21,8 +21,8 @@
     <ion-row>
       <ion-col col-100>
         <ion-item>
-          <ion-input placeholder="New category name"></ion-input>
-          <button ion-button item-right>
+          <ion-input #newCat placeholder="New category name" (keyup.enter)="addCat(newCat.value)"></ion-input>
+          <button ion-button item-right (click)="addCat(newCat.value)" >
             Add
           </button>
         </ion-item>
