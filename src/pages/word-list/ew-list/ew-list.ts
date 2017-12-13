@@ -196,6 +196,17 @@ export class EwListPage {
     }).catch(no => null);
   }
 
+  download() {
+    const fileName = this.cat.name + "_" + this.lec.name + ".xlsx";
+    let datas = new Array<Array<any>>();
+
+    this.words.forEach(word => {
+      datas.push(this.wordToData(word));
+    });
+
+    this.file_.export(fileName, datas);
+  }
+
   async onFileChange(evt: any) {
     
     const dt: DataTransfer = <DataTransfer>(evt.target);
@@ -320,9 +331,19 @@ export class EwListPage {
     return word;
   }
 
-  // wordToData(word: Word): Array<any> {
-  //     return new Array<any>(word.head1, word.head2, word.body1, word.body2, word.id);
-  // }
+  wordToData(word: Word): Array<any> {
+    let data = new Array<any>();
+
+    data.push(word.que);
+    data.push(word.me1);
+    data.push(word.me2);
+    data.push(word.me3);
+    data.push(word.me4);
+    data.push(word.me5);
+    data.push(word.me6);
+
+    return data;
+  }
 
   presentToast(position: string, message: string, cssClass: string, duration?: number): void {
     let options: ToastOptions = {

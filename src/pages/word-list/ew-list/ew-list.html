@@ -5,6 +5,11 @@
     </button>
     <ion-title *ngIf="lec" >{{lec.name}} (v. {{lec.version}})</ion-title>
 
+    <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="download()" >
+      <button ion-button icon-only color="secondary">
+        <ion-icon name="cloud-download"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startEdit()" >
       <button ion-button icon-only>
         <ion-icon name="create"></ion-icon>
