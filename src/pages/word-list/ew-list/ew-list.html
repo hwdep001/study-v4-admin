@@ -12,10 +12,15 @@
     </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startOrder()" >
       <button ion-button icon-only>
-        <ion-icon name="shuffle"></ion-icon>
+        <ion-icon name="move"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="isEdit || isOrder" (click)="save()" >
+      <button ion-button icon-only color="primary">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons class="nav-btn" end *ngIf="isEdit && !isOrder" >
       <button ion-button icon-only color="secondary">
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
@@ -68,7 +73,7 @@
             <ion-input type="text" #me6 placeholder="example meaning"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col col-9>
           <button ion-button item-right (click)="addWord(que.value, 
               me1.value, me2.value, me3.value, me4.value, me5.value, me6.value)" >
             Add
@@ -162,40 +167,80 @@
     <!-- isEdit -->
     <ng-container *ngIf="isEdit" >
       <ion-row class="row-header">
-        <ion-col col-10>
+        <ion-col col-13>
           <ion-item>
-            <ion-label>No</ion-label>
+            <ion-label>word</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col col-65>
+        <ion-col col-13>
           <ion-item>
-            <ion-label>Name</ion-label>
+            <ion-label>m type1</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col col-15>
+        <ion-col col-13>
           <ion-item>
-            <ion-label>Ver</ion-label>
+            <ion-label>m value1</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item>
+            <ion-label>m type2</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item>
+            <ion-label>m value2</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item>
+            <ion-label>ex phrase</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item>
+            <ion-label>ex meaning</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-row class="row-list" *ngFor="let word of words_; let i = index;">
-        <ion-col col-10>
-          <ion-item>
-            <ion-label>{{i+1}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-65>
+        <ion-col col-13>
           <ion-item >
-            <ion-input type="text" [(ngModel)]="word.name"></ion-input>
+            <ion-input type="text" [(ngModel)]="word.que"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-15>
-          <ion-item>
-            <ion-label>{{word.version}}</ion-label>
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me1"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-10 *ngIf="isEdit" >
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me2"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me3"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me4"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me5"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-13>
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="word.me6"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-9>
           <ion-item class="item-trash">
             <ion-buttons (click)="trashWord(i, word)">
               <button ion-button clear icon-only color="danger">
@@ -211,7 +256,7 @@
 
   <ion-list class="ilist-item" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderWords($event)">
     <ion-item *ngFor="let word of words_; let i = index;">
-      {{word.name}}
+      {{word.que}}
     </ion-item>
   </ion-list>
 

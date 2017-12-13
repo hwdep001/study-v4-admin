@@ -109,7 +109,7 @@ export class CommonService {
           let alert = this.alertCtrl.create({
             title: title || 'Alert',
             subTitle: msg,
-            buttons: ['Dismiss']
+            buttons: ['Close']
           });
     
           alert.present();

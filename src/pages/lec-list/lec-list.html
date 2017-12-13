@@ -12,12 +12,12 @@
     </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startOrder()" >
       <button ion-button icon-only>
-        <ion-icon name="shuffle"></ion-icon>
+        <ion-icon name="move"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="isEdit || isOrder" (click)="save()" >
-      <button ion-button icon-only color="secondary">
-        <ion-icon name="cloud-upload"></ion-icon>
+      <button ion-button icon-only color="primary">
+        <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons class="nav-btn" end *ngIf="isEdit || isOrder" (click)="cancel()" >

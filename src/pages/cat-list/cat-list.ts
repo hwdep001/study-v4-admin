@@ -142,6 +142,12 @@ export class CatListPage {
 
   save(): void {
     this.cmn_.Alert.confirm("저장하시겠습니까?").then(yes => {
+      
+      if(!this.checkSave()) {
+        this.cmn_.Alert.alert("이름은 필수 입력 사항입니다.");
+        return;
+      }
+
       const loader = this.cmn_.getLoader(null, null);
       loader.present();
   
@@ -156,6 +162,19 @@ export class CatListPage {
         loader.dismiss();
       });
     }).catch(no => null);
+  }
+
+  checkSave(): boolean {
+    let successFlag = true;
+
+    for(let cat_ of this.cats_) {
+      if(cat_.name.isEmpty()) {
+        successFlag = false;
+        break;
+      }
+    }
+
+    return successFlag;
   }
 
   cancel(): void {

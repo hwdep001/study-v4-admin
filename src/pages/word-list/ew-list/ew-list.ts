@@ -1,11 +1,9 @@
-import { EwWord } from './../../../models/EwWord';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 import * as firebase from 'firebase/app';
 
-import { CommonUtil } from './../../../utils/commonUtil';
 import { CommonService } from './../../../providers/common-service';
 
 import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
@@ -13,6 +11,7 @@ import { Subject } from './../../../models/Subject';
 import { Category } from './../../../models/Category';
 import { Lecture } from './../../../models/Lecture';
 import { Word } from '../../../models/Word';
+import { EwWord } from './../../../models/EwWord';
 
 @Component({
   selector: 'page-ewList',
@@ -102,7 +101,7 @@ export class EwListPage {
             que: w.que,
             me1: w.me1, me2: w.me2, me3: w.me3, me4: w.me4, me5: w.me5, me6: w.me6,
             me7: w.me7, me8: w.me8, me9: w.me9, me10: w.me10, me11: w.me11,
-            me12: w.me12, me13: w.me13, syn: w.syn, ant: w.ant,
+            me12: w.me12, me13: w.me13, syn: w.syn, ant: w.ant
         }).then( () => {
             this.presentToast("top", que + " - 등록되었습니다.", null);
             return this.updateLecVersion();
@@ -131,127 +130,155 @@ export class EwListPage {
     });
   }
 
-  // //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
-  // startEdit(): void {
-  //   this.isEdit = true;
-  //   this.lecs_trash = [];
-  //   this.lecs_ = this.lecs.map(x => Object.assign({}, x));
-  // }
+  startEdit(): void {
+    this.isEdit = true;
+    this.words_trash = [];
+    this.words_ = this.words.map(x => Object.assign({}, x));
+  }
 
-  // startOrder(): void {
-  //   this.isOrder = true;
-  //   this.lecs_trash = [];
-  //   this.lecs_ = this.lecs.map(x => Object.assign({}, x));
-  // }
+  startOrder(): void {
+    this.isOrder = true;
+    this.words_trash = [];
+    this.words_ = this.words.map(x => Object.assign({}, x));
+  }
 
-  // save(): void {
-  //   this.cmn_.Alert.confirm("저장하시겠습니까?").then(yes => {
-  //     const loader = this.cmn_.getLoader(null, null);
-  //     loader.present();
+  save(): void {
+    this.cmn_.Alert.confirm("저장하시겠습니까?").then(yes => {
+
+      if(!this.checkSave()) {
+        this.cmn_.Alert.alert("이름은 필수 입력 사항입니다.");
+        return;
+      }
+
+      const loader = this.cmn_.getLoader(null, null);
+      loader.present();
   
-  //     this.saveLecs()
-  //     .then(any => {
-  //       this.getLecs();
-  //       this.isEdit = false;
-  //       this.isOrder = false;
-  //       loader.dismiss();
-  //     }).catch(err => {
-  //       console.log(err);
-  //       loader.dismiss();
-  //     });
-  //   }).catch(no => null);
-  // }
+      this.saveWords()
+      .then(any => {
+        this.getWords();
+        this.isEdit = false;
+        this.isOrder = false;
+        loader.dismiss();
+      }).catch(err => {
+        console.log(err);
+        loader.dismiss();
+      });
+    }).catch(no => null);
+  }
 
-  // cancel(): void {
-  //   this.cmn_.Alert.confirm("취소하시겠습니까?").then(yes => {
-  //     if(this.isOrder) {
-  //       this.isOrder = false;
-  //     }
+  checkSave(): boolean {
+    let successFlag = true;
+
+    for(let word_ of this.words_) {
+      if(word_.que.isEmpty()) {
+        successFlag = false;
+        break;
+      }
+    }
+
+    return successFlag;
+  }
+
+  cancel(): void {
+    this.cmn_.Alert.confirm("취소하시겠습니까?").then(yes => {
+      if(this.isOrder) {
+        this.isOrder = false;
+      }
   
-  //     if(this.isEdit) {
-  //       this.isEdit = false;
-  //       this.lecs_trash = [];
-  //     }
-  //   }).catch(no => null);
-  // }
+      if(this.isEdit) {
+        this.isEdit = false;
+        this.words_trash = [];
+      }
+    }).catch(no => null);
+  }
 
-  // //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
-  // trashLec(index: number, lec: Lecture): void {
-  //   this.lecs_.splice(index, 1);
-  //   this.lecs_trash.push(lec);
-  // }
+  trashWord(index: number, word: Word): void {
+    this.words_.splice(index, 1);
+    this.words_trash.push(word);
+  }
 
-  // saveLecs(): Promise<any> {
-  //   let i: number = 1;
-  //   let pros = new Array<Promise<any>>();
+  saveWords(): Promise<any> {
+    let i: number = 1;
+    let pros = new Array<Promise<any>>();
 
-  //   for(let lec_ of this.lecs_) {
-  //     lec_.num = i;
-  //     const lec = this.lecsMap.get(lec_.id);
+    for(let word_ of this.words_) {
+      
+      word_.num = i;
+      word_.que = word_.que == null ? word_.que : word_.que.trimToNull();
+      word_.me1  = word_.me1  == null ? word_.me1  : word_.me1.trimToNull();
+      word_.me2  = word_.me2  == null ? word_.me2  : word_.me2.trimToNull();
+      word_.me3  = word_.me3  == null ? word_.me3  : word_.me3.trimToNull();
+      word_.me4  = word_.me4  == null ? word_.me4  : word_.me4.trimToNull();
+      word_.me5  = word_.me5  == null ? word_.me5  : word_.me5.trimToNull();
+      word_.me6  = word_.me6  == null ? word_.me6  : word_.me6.trimToNull();
+      word_.me7  = word_.me7  == null ? word_.me7  : word_.me7.trimToNull();
+      word_.me8  = word_.me8  == null ? word_.me8  : word_.me8.trimToNull();
+      word_.me9  = word_.me9  == null ? word_.me9  : word_.me9.trimToNull();
+      word_.me10 = word_.me10 == null ? word_.me10 : word_.me10.trimToNull();
+      word_.me11 = word_.me11 == null ? word_.me11 : word_.me11.trimToNull();
+      word_.me12 = word_.me12 == null ? word_.me12 : word_.me12.trimToNull();
+      word_.me13 = word_.me13 == null ? word_.me13 : word_.me13.trimToNull();
+      word_.syn = word_.syn == null ? word_.syn : word_.syn.trimToNull();
+      word_.ant = word_.ant == null ? word_.ant : word_.ant.trimToNull();
+      
+      const wordObject: object = {
+        num: word_.num,
+        que: word_.que,
+        me1: word_.me1, 
+        me2: word_.me2, 
+        me3: word_.me3, 
+        me4: word_.me4, 
+        me5: word_.me5, 
+        me6: word_.me6,
+        me7: word_.me7, 
+        me8: word_.me8, 
+        me9: word_.me9, 
+        me10: word_.me10, 
+        me11: word_.me11,
+        me12: word_.me12, 
+        me13: word_.me13, 
+        syn: word_.syn, 
+        ant: word_.ant
+      };
+      
+      if(word_.id == null) {
+        pros.push(this.wordsRef.add(wordObject));
+      } else {
+        const word = this.wordsMap.get(word_.id);
+        if(!Word.equals(word, word_)) {
+          pros.push(this.wordsRef.doc(word.id).update(wordObject));
+        }
+      }
 
-  //     if(lec.name != lec_.name && lec.num != lec_.num) {  // 둘 다 변경
-  //       pros.push(this.updateLec(lec_, true, true));  
-  //     } else if(lec.name != lec_.name) {                  // name만 변경  
-  //       pros.push(this.updateLec(lec_, false, true)); 
-  //     } else if(lec.num != lec_.num) {                    // num만 변경
-  //       pros.push(this.updateLec(lec_, true, false)); 
-  //     }
+      i++;
+    }
 
-  //     i++;
-  //   }
+    for(let word_trash of this.words_trash) {
+      pros.push(this.removeWord(word_trash.id));
+    }
 
-  //   for(let lec_trash of this.lecs_trash) {
-  //     pros.push(this.removeLec(lec_trash.id));
-  //   }
+    return Promise.all(pros).then(any => {
+      if(pros.length > 0) {
+        this.updateLecVersion();
+      }
+    });
+  }
 
-  //   return Promise.all(pros).then(any => {
-  //     if(pros.length > 0) {
-  //       this.updateCatVersion();
-  //     }
-  //   });
-  // }
-
-  // updateLec(lec: Lecture, isNumChange: boolean, isNameChange: boolean): Promise<any> {
-  //   let updateData: CustomObject = {
-  //       version: lec.version + this.VERSION_UP
-  //   }
-
-  //   if(isNumChange) {
-  //       updateData.num = lec.num;
-  //   }
-
-  //   if(isNameChange) {
-  //       updateData.name = lec.name
-  //   }
-
-  //   return this.lecsRef.doc(lec.id).update(updateData);
-  // }
-
-  // removeLec(lecId: string): Promise<any> {
-  //   let pros = new Array<Promise<any>>();
-
-  //   // word documents delete
-  //   this.lecsRef.doc(lecId).collection("words").get().then(querySnapshot => {
-  //     querySnapshot.forEach(wordDocSnapshot => {
-  //       pros.push(wordDocSnapshot.ref.delete());
-  //     });
-  //   });
-
-  //   return Promise.all(pros).then( () => {
-  //       // lec document delete
-  //       return this.lecsRef.doc(lecId).delete();
-  //   });
-  // }
+  removeWord(wordId: string): Promise<any> {
+    return this.wordsRef.doc(wordId).delete();
+  }
   
-  // reorderLecs(indexes): void {
-  //   let element = this.lecs_[indexes.from];
-  //   this.lecs_.splice(indexes.from, 1);
-  //   this.lecs_.splice(indexes.to, 0, element);
-  // }
+  reorderWords(indexes): void {
+    let element = this.words_[indexes.from];
+    this.words_.splice(indexes.from, 1);
+    this.words_.splice(indexes.to, 0, element);
+  }
 
-  // //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
   presentToast(position: string, message: string, cssClass: string, duration?: number): void {
     let options: ToastOptions = {

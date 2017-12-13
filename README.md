@@ -27,3 +27,10 @@ $ cordova plugin add cordova-plugin-inappbrowser --save
 $ cordova plugin add cordova-plugin-customurlscheme --variable \
   URL_SCHEME=com.firebase.cordova --save
 ```
+
+### [FileSaver.js] (https://github.com/eligrey/FileSaver.js)
+
+```
+$ npm install file-saver --save
+$ npm install @types/file-saver --save-dev
+```
