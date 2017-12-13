@@ -4,6 +4,7 @@ import { ToastController } from 'ionic-angular/components/toast/toast-controller
 
 import * as firebase from 'firebase/app';
 
+import { CommonUtil } from '../../utils/commonUtil';
 import { CommonService } from './../../providers/common-service';
 
 import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
@@ -17,13 +18,15 @@ import { Category } from './../../models/Category';
 export class CatListPage {
 
   private VERSION_UP: number = 1;
-
+  
+  isEdit: boolean = false;
   subsRef: firebase.firestore.CollectionReference;
   catsRef: firebase.firestore.CollectionReference;
+
   sub: Subject;
   cats: Array<Category>;
-
-  isEdit: boolean = false;
+  cats_: Array<Category>;
+  cats_trash: Array<Category>;
 
   constructor(
     public navCtrl: NavController,
@@ -100,6 +103,38 @@ export class CatListPage {
     }).then(any => loader.dismiss())
     .catch(err => loader.dismiss());
   }
+
+  clickCat(cat: Category): void {
+    console.log("clickCat: " + cat);
+    // this.navCtrl.push(LecListPage, {
+    //   activeName: CommonUtil.getActiveName(this.sub.id), sub: this.sub, cat: cat});
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  startEdit() {
+    this.isEdit = true;
+    this.cats_trash = [];
+    this.cats_ = this.cats.map(x => Object.assign({}, x));
+  }
+
+  cancelEdit() {
+    this.isEdit = false;
+    this.cats_trash = [];
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  trashCat(index: number, cat: Category) {
+    this.cats_.splice(index, 1);
+    this.cats_trash.push(cat);
+  }
+
+  saveEdit() {
+    
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
 
   showToast(position: string, message: string, cssClass: string, duration?: number): void {
     let options: ToastOptions = {

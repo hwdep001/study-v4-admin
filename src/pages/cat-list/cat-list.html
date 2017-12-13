@@ -5,14 +5,19 @@
     </button>
     <ion-title *ngIf="sub" >{{sub.name}}</ion-title>
 
-    <ion-buttons end *ngIf="!isEdit" (click)="isEdit = true" >
+    <ion-buttons class="nav-btn" end *ngIf="!isEdit" (click)="startEdit()" >
       <button ion-button icon-only>
         EDIT
       </button>
     </ion-buttons>
-    <ion-buttons end *ngIf="isEdit" (click)="isEdit = false" >
+    <ion-buttons class="nav-btn" end *ngIf="isEdit" (click)="saveEdit()" >
       <button ion-button icon-only>
         SAVE
+      </button>
+    </ion-buttons>
+    <ion-buttons class="nav-btn" end *ngIf="isEdit" (click)="cancelEdit()" >
+      <button ion-button icon-only>
+        CANCEL
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -21,7 +26,8 @@
     <ion-row>
       <ion-col col-100>
         <ion-item>
-          <ion-input #newCat placeholder="New category name" (keyup.enter)="addCat(newCat.value)"></ion-input>
+          <ion-input type="text" #newCat placeholder="New category name" 
+              (keyup.enter)="addCat(newCat.value)"></ion-input>
           <button ion-button item-right (click)="addCat(newCat.value)" >
             Add
           </button>
@@ -34,49 +40,94 @@
 <ion-content class="icontent" [ngClass]="isEdit ? 'margin-56' : 'margin-100'" >
 
   <ion-list class="ilist">
-    <ion-row class="row-header">
-      <ion-col col-10>
-        <ion-item>
-          <ion-label>No</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-65>
-        <ion-item>
-          <ion-label>Name</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-15>
-        <ion-item>
-          <ion-label>Ver</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row class="row-list" *ngFor="let cat of cats">
-      <ion-col col-10>
-        <ion-item>
-          <ion-label>{{cat.num}}</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-65>
-        <ion-item>
-          <ion-label>{{cat.name}}</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-15>
-        <ion-item>
-          <ion-label>{{cat.version}}</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-10 *ngIf="isEdit" >
-        <ion-item class="item-trash">
-          <ion-buttons>
-            <button ion-button clear icon-only color="danger">
-              <ion-icon name="trash"></ion-icon>
-            </button>
-          </ion-buttons>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+
+    <!-- !isEdit -->
+    <ng-container *ngIf="!isEdit" >
+      <ion-row class="row-header">
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>No</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-70>
+          <ion-item>
+            <ion-label>Name</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>Ver</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-list" *ngFor="let cat of cats">
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>{{cat.num}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-70>
+          <ion-item (click)="clickCat(cat)" >
+            <ion-label>{{cat.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>{{cat.version}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <!-- isEdit -->
+    <ng-container *ngIf="isEdit" >
+      <ion-row class="row-header">
+        <ion-col col-10>
+          <ion-item>
+            <ion-label>No</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-65>
+          <ion-item>
+            <ion-label>Name</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>Ver</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-list" *ngFor="let cat of cats_; let i = index;">
+        <ion-col col-10>
+          <ion-item>
+            <ion-label>{{cat.num}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-65>
+          <ion-item >
+            <ion-input type="text" [value]="cat.name"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-15>
+          <ion-item>
+            <ion-label>{{cat.version}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-10 *ngIf="isEdit" >
+          <ion-item class="item-trash">
+            <ion-buttons (click)="trashCat(i, cat)">
+              <button ion-button clear icon-only color="danger">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-buttons>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
   </ion-list>
 
 </ion-content>
