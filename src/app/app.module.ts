@@ -24,6 +24,7 @@ import { SigninPage } from './../pages/signin/signin';
 import { HomePage } from './../pages/home/home';
 import { TestPage } from './../pages/test/test';
   import { Tab1Page } from './../pages/test/tab1/tab1';
+import { CatListPage } from './../pages/cat-list/cat-list';
 import { SettingPage } from './../pages/setting/setting';
   
 @NgModule({
@@ -33,6 +34,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
+    CatListPage,
     SettingPage
   ],
   imports: [
@@ -50,6 +52,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
+    CatListPage,
     SettingPage
   ],
   providers: [
