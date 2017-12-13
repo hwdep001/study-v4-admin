@@ -5,24 +5,29 @@
     </button>
     <ion-title *ngIf="sub" >{{sub.name}}</ion-title>
 
-    <ion-buttons class="nav-btn" end *ngIf="!isEdit" (click)="startEdit()" >
+    <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startEdit()" >
       <button ion-button icon-only>
-        EDIT
+        <ion-icon name="create"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons class="nav-btn" end *ngIf="isEdit" (click)="saveEdit()" >
+    <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startOrder()" >
       <button ion-button icon-only>
-        SAVE
+        <ion-icon name="shuffle"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons class="nav-btn" end *ngIf="isEdit" (click)="cancelEdit()" >
-      <button ion-button icon-only>
-        CANCEL
+    <ion-buttons class="nav-btn" end *ngIf="isEdit || isOrder" (click)="save()" >
+      <button ion-button icon-only color="secondary">
+        <ion-icon name="cloud-upload"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons class="nav-btn" end *ngIf="isEdit || isOrder" (click)="cancel()" >
+      <button ion-button icon-only color="danger">
+        <ion-icon name="redo"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
-  <ion-grid class="add-navi-gird" *ngIf="!isEdit"  >
+  <ion-grid class="add-navi-gird" *ngIf="!isEdit && !isOrder"  >
     <ion-row>
       <ion-col col-100>
         <ion-item>
@@ -37,9 +42,9 @@
   </ion-grid>
 </ion-header>
 
-<ion-content class="icontent" [ngClass]="isEdit ? 'margin-56' : 'margin-100'" >
+<ion-content class="icontent" [ngClass]="isEdit || isOrder ? 'margin-56' : 'margin-100'" >
 
-  <ion-list class="ilist">
+  <ion-list class="ilist-row" *ngIf="!isOrder">
 
     <!-- !isEdit -->
     <ng-container *ngIf="!isEdit" >
@@ -103,12 +108,12 @@
       <ion-row class="row-list" *ngFor="let cat of cats_; let i = index;">
         <ion-col col-10>
           <ion-item>
-            <ion-label>{{cat.num}}</ion-label>
+            <ion-label>{{i+1}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col col-65>
           <ion-item >
-            <ion-input type="text" [value]="cat.name"></ion-input>
+            <ion-input type="text" [(ngModel)]="cat.name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-15>
@@ -128,6 +133,12 @@
       </ion-row>
     </ng-container>
 
+  </ion-list>
+
+  <ion-list class="ilist-row" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderCats($event)">
+    <ion-item *ngFor="let cat of cats_; let i = index;">
+      {{cat.name}}
+    </ion-item>
   </ion-list>
 
 </ion-content>

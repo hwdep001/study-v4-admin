@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 import { User } from '../models/User';
 import { Loading } from 'ionic-angular/components/loading/loading';
@@ -8,7 +9,8 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 export class CommonService {
 
     constructor(
-        private loadingCtrl: LoadingController
+        private loadingCtrl: LoadingController,
+        private alertCtrl: AlertController
     ) {
     
     }
@@ -76,4 +78,41 @@ export class CommonService {
           dismissOnPageChange: dismissOnPageChange
         });
     }
+
+    public Alert = {
+        confirm: (msg?, title?) => {
+          return new Promise((resolve, reject) => {
+            let alert = this.alertCtrl.create({
+              title: title || 'Confirm',
+              message: msg || 'Do you want continue?',
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel',
+                  handler: () => {
+                    reject(false);
+                  }
+                },
+                {
+                  text: 'Ok',
+                  handler: () => {
+                    resolve(true);
+                  }
+                }
+              ]
+            });
+            alert.present();
+          });
+    
+        },
+        alert: (msg, title?) => {
+          let alert = this.alertCtrl.create({
+            title: title || 'Alert',
+            subTitle: msg,
+            buttons: ['Dismiss']
+          });
+    
+          alert.present();
+        }
+      }
 }
