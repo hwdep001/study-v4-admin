@@ -11,6 +11,8 @@ import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
 import { Subject } from './../../models/Subject';
 import { Category } from './../../models/Category';
 
+import { LecListPage } from './../lec-list/lec-list';
+
 @Component({
   selector: 'page-catList',
   templateUrl: 'cat-list.html'
@@ -120,9 +122,8 @@ export class CatListPage {
   }
 
   clickCat(cat: Category): void {
-    console.log("clickCat: " + cat);
-    // this.navCtrl.push(LecListPage, {
-    //   activeName: CommonUtil.getActiveName(this.sub.id), sub: this.sub, cat: cat});
+    this.navCtrl.push(LecListPage, {
+      activeName: CommonUtil.getActiveName(this.sub.id), sub: this.sub, cat: cat});
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -216,7 +217,7 @@ export class CatListPage {
         updateData.name = cat.name
     }
 
-    return this.subsRef.doc(this.sub.id).collection("cats").doc(cat.id).update(updateData);
+    return this.catsRef.doc(cat.id).update(updateData);
   }
 
   removeCat(catId: string): Promise<any> {
@@ -244,7 +245,7 @@ export class CatListPage {
 
     return Promise.all(pros).then( () => {
         // cat document delete
-        this.subsRef.doc(this.sub.id).collection("cats").doc(catId).delete();
+        return this.catsRef.doc(catId).delete();
     });
   }
   

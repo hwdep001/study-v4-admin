@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="sub" >{{sub.name}}</ion-title>
+    <ion-title *ngIf="cat" >{{cat.name}} (v. {{cat.version}})</ion-title>
 
     <ion-buttons class="nav-btn" end *ngIf="!isEdit && !isOrder" (click)="startEdit()" >
       <button ion-button icon-only>
@@ -31,9 +31,9 @@
     <ion-row>
       <ion-col col-100>
         <ion-item>
-          <ion-input type="text" #newCat placeholder="New category name" 
-              (keyup.enter)="addCat(newCat.value)"></ion-input>
-          <button ion-button item-right (click)="addCat(newCat.value)" >
+          <ion-input type="text" #newLec placeholder="New lecture name" 
+              (keyup.enter)="addLec(newLec.value)"></ion-input>
+          <button ion-button item-right (click)="addLec(newLec.value)" >
             Add
           </button>
         </ion-item>
@@ -66,20 +66,20 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="row-list" *ngFor="let cat of cats">
+      <ion-row class="row-list" *ngFor="let lec of lecs">
         <ion-col col-15>
           <ion-item>
-            <ion-label>{{cat.num}}</ion-label>
+            <ion-label>{{lec.num}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col col-70>
-          <ion-item (click)="clickCat(cat)" class="cursor cat-name" >
-            <ion-label>{{cat.name}}</ion-label>
+          <ion-item (click)="clickLec(lec)" class="cursor lec-name" >
+            <ion-label>{{lec.name}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col col-15>
           <ion-item>
-            <ion-label>{{cat.version}}</ion-label>
+            <ion-label>{{lec.version}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -105,7 +105,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="row-list" *ngFor="let cat of cats_; let i = index;">
+      <ion-row class="row-list" *ngFor="let lec of lecs_; let i = index;">
         <ion-col col-10>
           <ion-item>
             <ion-label>{{i+1}}</ion-label>
@@ -113,17 +113,17 @@
         </ion-col>
         <ion-col col-65>
           <ion-item >
-            <ion-input type="text" [(ngModel)]="cat.name"></ion-input>
+            <ion-input type="text" [(ngModel)]="lec.name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-15>
           <ion-item>
-            <ion-label>{{cat.version}}</ion-label>
+            <ion-label>{{lec.version}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col col-10 *ngIf="isEdit" >
           <ion-item class="item-trash">
-            <ion-buttons (click)="trashCat(i, cat)">
+            <ion-buttons (click)="trashLec(i, lec)">
               <button ion-button clear icon-only color="danger">
                 <ion-icon name="trash"></ion-icon>
               </button>
@@ -135,9 +135,9 @@
 
   </ion-list>
 
-  <ion-list class="ilist-item" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderCats($event)">
-    <ion-item *ngFor="let cat of cats_; let i = index;">
-      {{cat.name}}
+  <ion-list class="ilist-item" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderLecs($event)">
+    <ion-item *ngFor="let lec of lecs_; let i = index;">
+      {{lec.name}}
     </ion-item>
   </ion-list>
 
