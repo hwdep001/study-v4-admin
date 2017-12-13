@@ -12,6 +12,8 @@ import { Subject } from './../../models/Subject';
 import { Category } from './../../models/Category';
 import { Lecture } from './../../models/Lecture';
 
+import { EwListPage } from './../word-list/ew-list/ew-list';
+
 @Component({
   selector: 'page-lecList',
   templateUrl: 'lec-list.html'
@@ -116,9 +118,18 @@ export class LecListPage {
   }
 
   clickLec(lec: Lecture): void {
-    console.log("clickLec: " + lec.name);
-    // this.navCtrl.push(WordListPage, {
-    //   activeName: CommonUtil.getActiveName(this.sub.id), sub: this.sub, cat: cat, lec: lec});
+    const option = {
+      activeName: CommonUtil.getActiveName(this.sub.id), 
+      sub: this.sub, 
+      cat: this.cat, 
+      lec: lec
+    }
+
+    switch(this.sub.id) {
+      case "ew": 
+        this.navCtrl.push(EwListPage, option);
+        break;
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////

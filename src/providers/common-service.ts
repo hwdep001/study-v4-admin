@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
-import { User } from '../models/User';
 import { Loading } from 'ionic-angular/components/loading/loading';
+import { User } from './../models/User';
 
 @Injectable()
 export class CommonService {
@@ -114,5 +114,5 @@ export class CommonService {
     
           alert.present();
         }
-      }
+    }
 }
