@@ -22,47 +22,61 @@ export class CommonService {
     }
 
     get uid(): string {
-        return this.user_.uid;
+        return this.existUser? this.user_.uid : null;
     }
 
     get displayName(): string {
-        return this.user_.displayName;
+        return this.existUser? this.user_.displayName : null;
     }
 
     get email(): string {
-        return this.user_.email;
+        return this.existUser? this.user_.email : null;
     }
 
     get photoURL(): string {
-        return this.user_.photoURL;
+        return this.existUser? this.user_.photoURL : null;
     }
 
     get createDate(): string {
-        return this.user_.createDate;
+        return this.existUser? this.user_.createDate : null;
     }
 
     get lastDate(): string {
-        return this.user_.lastDate;
+        return this.existUser? this.user_.lastDate : null;
     }
 
     get isAuth(): boolean {
-        return this.user_.isAuth;
+        return this.existUser? this.user_.isAuth : false;
     }
 
     get isDel(): boolean {
-        return this.user_.isDel;
+        return this.existUser? this.user_.isDel : false;
+    }
+
+    get ad(): boolean {
+        return this.existUser? this.user_.ad : false;
+    }
+
+    get existUser(): boolean {
+        return this.user_ == null ? false: true;
     }
 
     setUser(user) {
-        this.user_ = new User();
-        this.user_.uid = user.uid;
-        this.user_.displayName = user.displayName;
-        this.user_.email = user.email;
-        this.user_.photoURL = user.photoURL;
-        this.user_.createDate = user.createDate;
-        this.user_.lastDate = user.lastDate;
-        this.user_.isAuth = user.isAuth;
-        this.user_.isDel = user.isDel;
+        
+        if(user == null) {
+            this.user_ = null;
+        } else {
+            this.user_ = new User();
+            this.user_.uid = user.uid;
+            this.user_.displayName = user.displayName;
+            this.user_.email = user.email;
+            this.user_.photoURL = user.photoURL;
+            this.user_.createDate = user.createDate;
+            this.user_.lastDate = user.lastDate;
+            this.user_.isAuth = user.isAuth;
+            this.user_.isDel = user.isDel;
+            this.user_.ad = user.ad;
+        }
     }
 
     getLoader(spinner: string, content: string, duration?: number, dismissOnPageChange?: boolean): Loading {

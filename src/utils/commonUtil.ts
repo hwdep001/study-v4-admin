@@ -87,20 +87,6 @@ export class CommonUtil {
 
     public static void(): void {};
 
-    public static fireUser2user(fireUser: firebase.User): User {
-        let user: User = null;
-
-        if(fireUser != null) {
-            user = new User();
-            user.uid = fireUser.uid;
-            user.email = fireUser.email;
-            user.displayName = fireUser.displayName;
-            user.photoURL = fireUser.photoURL;
-        }
-
-        return user;
-    }
-
     public static getActiveName(param: string): string {
         let result: string;
         switch(param) {

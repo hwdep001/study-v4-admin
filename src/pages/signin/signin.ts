@@ -17,8 +17,4 @@ export class SigninPage {
   signInWithGoogle() {
     firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
-
-  signOut() {
-    firebase.auth().signOut();
-  }
 }

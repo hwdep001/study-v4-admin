@@ -14,13 +14,13 @@ import { AngularFireAuth } from 'angularfire2/auth';  // delete X
 
 // providers
 import { CommonUtil } from './../utils/commonUtil';
-import { CommonService } from '../providers/common-service';
-import { TestService } from '../providers/test-service';
+import { CommonService } from './../providers/common-service';
+import { TestService } from './../providers/test-service';
 
 // models
-import { MenuTitleInterface } from '../models/menu/MenuTitleInterface';
+import { MenuTitleInterface } from './../models/menu/MenuTitleInterface';
 import { PageInterface } from './../models/menu/PageInterface';
-import { User } from '../models/User';
+import { User } from './../models/User';
 
 // pages
 import { SigninPage } from './../pages/signin/signin';
@@ -39,7 +39,6 @@ export class MyApp {
   lastBack: any;  // for backbutton
 
   usersRef: firebase.firestore.CollectionReference;
-  user: User;
 
   pages: Array<{title: string, component: any}>;
   navigatePages: PageInterface[];
@@ -85,31 +84,41 @@ export class MyApp {
 
   subscribeAuth() {
     firebase.auth().onAuthStateChanged(fireUser => {
-      this.user = CommonUtil.fireUser2user(fireUser);
+
+      let pros: Promise<any>;
 
       if(fireUser != null) {
-        this.usersRef.where("uid", "==", this.user.uid).get().then(querySnapshot => {
-          if(querySnapshot.size > 0) {
-            this.usersRef.doc(this.user.uid).update(this.user.user2ObjectForUpdate());
-          } else {
-            this.usersRef.doc(this.user.uid).set(this.user.user2ObjectForSet());
-          }
-          querySnapshot.forEach(doc => {
+        pros = this.usersRef.doc(fireUser.uid).get().then(doc => {
+          if(doc.exists) {
+            this.usersRef.doc(fireUser.uid).update({
+              uid: fireUser.uid,
+              email: fireUser.email,
+              displayName: fireUser.displayName,
+              photoURL: fireUser.photoURL,
+              lastDate: new Date().yyyy_MM_dd_HH_mm_ss()
+            });
+            
             this.cmn_.setUser(doc.data());
-          });
+          }
         });
+      } else {
+        this.cmn_.setUser(null);
+        pros = new Promise(re => re());
       }
-      this.initializeMenu(fireUser);
+
+      pros.then(any => {
+        this.initializeMenu(fireUser);
+      });
     });
   }
 
   initializeMenu(fireUser: firebase.User) {
     this.setPages();
 
-    if(this.user != null) {
-      this.rootPage = HomePage;
+    if(this.cmn_.ad) {
+      this.nav.setRoot(HomePage);
     } else {
-      this.rootPage = SigninPage;
+      this.nav.setRoot(SigninPage);
     }
   }
 
@@ -125,7 +134,7 @@ export class MyApp {
     const ewPage: PageInterface = { title: '영단어',   name: 'EwPage',  component: CatListPage, param: {activeName: "EwPage", id: "ew"}, icon: 'book' };
     const settingPage: PageInterface = { title: '설정', name: 'SettingPage', component: SettingPage, icon: 'settings'};
 
-    if(this.user != null){
+    if(this.cmn_.ad){
       this.navigatePages = [];
       this.navigatePages.push(homePage);
       this.navigatePages.push(tabsPage);
