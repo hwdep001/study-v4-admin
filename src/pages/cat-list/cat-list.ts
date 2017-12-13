@@ -20,6 +20,8 @@ export class CatListPage {
   sub: Subject;
   cats: Array<Category>;
 
+  isEdit: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     private param: NavParams,
@@ -55,6 +57,7 @@ export class CatListPage {
 
   getCats(): Promise<any> {
     let cats = new Array<Category>();
+
     return this.catsRef.orderBy("num").get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
         let cat = doc.data();

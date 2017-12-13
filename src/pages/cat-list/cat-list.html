@@ -4,15 +4,73 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="sub" >{{sub.name}}</ion-title>
+
+    <ion-buttons end *ngIf="!isEdit" (click)="isEdit = true" >
+      <button ion-button icon-only>
+        EDIT
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="isEdit" (click)="isEdit = false" >
+      <button ion-button icon-only>
+        SAVE
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+  <ion-grid class="add-navi-gird" *ngIf="!isEdit"  >
+    <ion-row>
+      <ion-col col-100>
+        <ion-item>
+          <ion-input placeholder="New category name"></ion-input>
+          <button ion-button item-right>
+            Add
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content class="icontent">
+<ion-content class="icontent" [ngClass]="isEdit ? 'margin-56' : 'margin-100'" >
 
   <ion-list class="ilist">
-    <ion-item class="ilist-item cursor" *ngFor="let cat of cats" (click)="clickCat(cat)" >
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>No</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Name</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Ver</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let cat of cats">
+      <ion-col>
+        <ion-item>
+          <ion-label>{{cat.num}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>{{cat.name}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>{{cat.version}}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-item class="ilist-item">
       {{cat.name}}
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 
 </ion-content>
