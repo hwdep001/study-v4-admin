@@ -22,14 +22,20 @@
         {{user.email}}
       </ion-note>
     </ion-item>
+    <ion-item class="iitem">Display Name
+      <ion-note class="inote" item-end>
+        {{user.displayName}}
+      </ion-note>
+    </ion-item>
+    <ion-item class="iitem">Create Date
+      <ion-note class="inote" item-end>
+        {{user.createDate}}
+      </ion-note>
+    </ion-item>
 
     <ion-list-header class="iheader">
       Config
     </ion-list-header>
-    <ion-item class="iitem cursor" (click)="moveWordMng()">
-      <ion-icon name="logo-wordpress"></ion-icon>
-      <ion-note class="config">단어 관리</ion-note>
-    </ion-item>
     <ion-item class="iitem cursor" (click)="signOut()">
       <ion-icon name="log-out"></ion-icon>
       <ion-note class="config">로그아웃</ion-note>

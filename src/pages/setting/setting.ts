@@ -3,11 +3,9 @@ import { NavController } from 'ionic-angular';
 
 import * as firebase from 'firebase/app';
 
-import { CommonUtil } from './../../utils/commonUtil';
+import { CommonService } from './../../providers/common-service';
 
 import { User } from '../../models/User';
-
-import { WordMngPage } from './word-mng/word-mng';
 
 @Component({
   selector: 'page-setting',
@@ -19,13 +17,9 @@ export class SettingPage {
 
   constructor(
     public navCtrl: NavController,
+    private cmn_: CommonService
   ) {
-    this.user = CommonUtil.fireUser2user(firebase.auth().currentUser);
-  }
-
-  moveWordMng() {
-    this.navCtrl.push(WordMngPage, {
-      activeName: CommonUtil.getActiveName("setting")});
+    this.user = cmn_.user;
   }
 
   signOut() {

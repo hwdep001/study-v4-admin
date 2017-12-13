@@ -17,26 +17,14 @@ import { environment } from './../environments/environment';
 
 // providers
 import { CommonService } from './../providers/common-service';
-import { DBHelper } from './../providers/db-helper';
-import { ContactDBCount } from './../providers/db/contactDBCount';
-import { ContactDBLevel } from './../providers/db/contactDBLevel';
-import { ContactDBSubject } from './../providers/db/contactDBSubject';
-import { ContactDBLecture } from './../providers/db/contactDBLecture';
-import { ContactDBCategory } from './../providers/db/contactDBCategory';
-import { ContactDBWord } from './../providers/db/contactDBWord';
-import { TestService } from '.././providers/test-service';
+import { TestService } from './../providers/test-service';
 
 // pages
 import { SigninPage } from './../pages/signin/signin';
 import { HomePage } from './../pages/home/home';
 import { TestPage } from './../pages/test/test';
-  import { Tab1Page } from '../pages/test/tab1/tab1';
-import { CatListPage } from '../pages/cat-list/cat-list';
-import { LecListPage } from './../pages/lec-list/lec-list';
-import { EwListPage } from './../pages/word/ew-list/ew-list';
-import { WordTestPage } from './../pages/word/word-test/word-test';
+  import { Tab1Page } from './../pages/test/tab1/tab1';
 import { SettingPage } from './../pages/setting/setting';
-  import { WordMngPage } from './../pages/setting/word-mng/word-mng';
   
 @NgModule({
   declarations: [
@@ -45,12 +33,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
-    CatListPage,
-    LecListPage,
-    EwListPage,
-    WordTestPage,
-    SettingPage,
-      WordMngPage
+    SettingPage
   ],
   imports: [
     BrowserModule,
@@ -67,12 +50,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
-    CatListPage,
-    LecListPage,
-    EwListPage,
-    WordTestPage,
-    SettingPage,
-      WordMngPage
+    SettingPage
   ],
   providers: [
     StatusBar,
@@ -80,13 +58,6 @@ import { SettingPage } from './../pages/setting/setting';
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CommonService,
-    DBHelper,
-    ContactDBCount,
-    ContactDBLevel,
-    ContactDBSubject,
-    ContactDBCategory,
-    ContactDBLecture,
-    ContactDBWord,
     TestService
   ]
 })
