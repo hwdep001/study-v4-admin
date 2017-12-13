@@ -22,9 +22,21 @@ page-catList {
     .icontent {
 
         .ilist {
+
+            .row-header {
+                ion-item {
+                    text-align: center;
+                }
+            }
             
-            .ilist-item {
-                
+            .row-list {
+
+                .item-trash {
+                    text-align: center;
+                    ion-label {
+                        margin: 0px;
+                    }
+                }
             }
         }
     }
@@ -38,4 +50,5 @@ page-catList {
         .fixed-content {margin-top: 56px !important;}
         .scroll-content {margin-top: 56px !important;}
     }
+    
 }

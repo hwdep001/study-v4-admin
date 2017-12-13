@@ -34,43 +34,49 @@
 <ion-content class="icontent" [ngClass]="isEdit ? 'margin-56' : 'margin-100'" >
 
   <ion-list class="ilist">
-    <ion-row>
-      <ion-col>
+    <ion-row class="row-header">
+      <ion-col col-10>
         <ion-item>
           <ion-label>No</ion-label>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col col-65>
         <ion-item>
           <ion-label>Name</ion-label>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col col-15>
         <ion-item>
           <ion-label>Ver</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let cat of cats">
-      <ion-col>
+    <ion-row class="row-list" *ngFor="let cat of cats">
+      <ion-col col-10>
         <ion-item>
           <ion-label>{{cat.num}}</ion-label>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col col-65>
         <ion-item>
           <ion-label>{{cat.name}}</ion-label>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col col-15>
         <ion-item>
           <ion-label>{{cat.version}}</ion-label>
         </ion-item>
       </ion-col>
+      <ion-col col-10 *ngIf="isEdit" >
+        <ion-item class="item-trash">
+          <ion-buttons>
+            <button ion-button clear icon-only color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
     </ion-row>
-    <!-- <ion-item class="ilist-item">
-      {{cat.name}}
-    </ion-item> -->
   </ion-list>
 
 </ion-content>
