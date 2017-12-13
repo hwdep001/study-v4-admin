@@ -20,7 +20,6 @@ import { TestService } from './../providers/test-service';
 // models
 import { MenuTitleInterface } from './../models/menu/MenuTitleInterface';
 import { PageInterface } from './../models/menu/PageInterface';
-import { User } from './../models/User';
 
 // pages
 import { SigninPage } from './../pages/signin/signin';
@@ -97,7 +96,7 @@ export class MyApp {
               photoURL: fireUser.photoURL,
               lastDate: new Date().yyyy_MM_dd_HH_mm_ss()
             });
-            
+
             this.cmn_.setUser(doc.data());
           }
         });
