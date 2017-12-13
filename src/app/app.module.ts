@@ -17,6 +17,7 @@ import { environment } from './../environments/environment';
 
 // providers
 import { CommonService } from './../providers/common-service';
+import { FileService } from './../providers/file-service';
 import { TestService } from './../providers/test-service';
 
 // pages
@@ -28,6 +29,7 @@ import { CatListPage } from './../pages/cat-list/cat-list';
 import { LecListPage } from './../pages/lec-list/lec-list';
 import { EwListPage } from './../pages/word-list/ew-list/ew-list';
 import { SettingPage } from './../pages/setting/setting';
+
   
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { SettingPage } from './../pages/setting/setting';
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CommonService,
+    FileService,
     TestService
   ]
 })

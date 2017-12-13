@@ -5,12 +5,13 @@ import { ToastController } from 'ionic-angular/components/toast/toast-controller
 import * as firebase from 'firebase/app';
 
 import { CommonService } from './../../../providers/common-service';
+import { FileService } from './../../../providers/file-service';
 
 import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
 import { Subject } from './../../../models/Subject';
 import { Category } from './../../../models/Category';
 import { Lecture } from './../../../models/Lecture';
-import { Word } from '../../../models/Word';
+import { Word } from './../../../models/Word';
 import { EwWord } from './../../../models/EwWord';
 
 @Component({
@@ -38,7 +39,8 @@ export class EwListPage {
     public navCtrl: NavController,
     private param: NavParams,
     private toastCtrl: ToastController,
-    private cmn_: CommonService
+    private cmn_: CommonService,
+    private file_: FileService
   ) {
     this.initData();
   }
@@ -194,6 +196,21 @@ export class EwListPage {
     }).catch(no => null);
   }
 
+  async onFileChange(evt: any) {
+    
+    const dt: DataTransfer = <DataTransfer>(evt.target);
+            
+    if(dt.files.length == 1) {
+      const datas = await this.file_.uploadExcel(dt.files[0]);
+      datas.forEach(data => {
+        this.words_.push(this.dataToWord(data));
+      })
+    } else {
+      // this.words_ = [];
+      // this.fileName = null;
+    }   
+  }
+
   //////////////////////////////////////////////////////////////////////////////
 
   trashWord(index: number, word: Word): void {
@@ -279,6 +296,33 @@ export class EwListPage {
   }
 
   //////////////////////////////////////////////////////////////////////////////
+
+  dataToWord(data: Array<any>): Word {
+    let word = new Word();
+
+    word.que = data[0] == undefined? null: data[0];
+    word.me1 = data[1] == undefined? null: data[1];
+    word.me2 = data[2] == undefined? null: data[2];
+    word.me3 = data[3] == undefined? null: data[3];
+    word.me4 = data[4] == undefined? null: data[4];
+    word.me5 = data[5] == undefined? null: data[5];
+    word.me6 = data[6] == undefined? null: data[6];
+    word.me7 = null;
+    word.me8 = null;
+    word.me9 = null;
+    word.me10 = null;
+    word.me11 = null;
+    word.me12 = null;
+    word.me13 = null;
+    word.syn = null;
+    word.ant = null;
+
+    return word;
+  }
+
+  // wordToData(word: Word): Array<any> {
+  //     return new Array<any>(word.head1, word.head2, word.body1, word.body2, word.id);
+  // }
 
   presentToast(position: string, message: string, cssClass: string, duration?: number): void {
     let options: ToastOptions = {

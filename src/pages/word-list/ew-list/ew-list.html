@@ -20,7 +20,7 @@
         <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons class="nav-btn" end *ngIf="isEdit && !isOrder" >
+    <ion-buttons class="nav-btn" end *ngIf="isEdit && !isOrder" (click)="file.click()" >
       <button ion-button icon-only color="secondary">
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
@@ -34,6 +34,7 @@
 </ion-header>
 
 <ion-content class="icontent">
+  <input #file type="file" multiple="false" (change)="onFileChange($event)" style="display: none"/>
 
   <ion-list class="ilist-add">
     <ion-grid>
