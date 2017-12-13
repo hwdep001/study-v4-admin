@@ -40,3 +40,10 @@ $ npm install xlsx
 $ npm install file-saver --save
 $ npm install @types/file-saver --save-dev
 ```
+
+### [Status Bar] (https://ionicframework.com/docs/native/status-bar/)
+
+```
+$ ionic cordova plugin add cordova-plugin-statusbar
+$ npm install --save @ionic-native/status-bar
+```

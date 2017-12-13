@@ -74,7 +74,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      this.statusBar.backgroundColorByHexString("#323435");
       this.platform.registerBackButtonAction(() => this.exitApp());
       this.splashScreen.hide();
       this.savePlatform();
