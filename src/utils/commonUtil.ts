@@ -1,6 +1,3 @@
-import * as firebase from 'firebase/app';
-import { User } from './../models/User';
-
 declare global {
     interface Date {
         yyMMdd(): string;

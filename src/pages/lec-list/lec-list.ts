@@ -10,6 +10,7 @@ import { Subject } from './../../models/Subject';
 import { Category } from './../../models/Category';
 import { Lecture } from './../../models/Lecture';
 
+import { CcListPage } from './../word-list/cc-list/cc-list';
 import { EwListPage } from './../word-list/ew-list/ew-list';
 
 @Component({
@@ -123,6 +124,9 @@ export class LecListPage {
     }
 
     switch(this.sub.id) {
+      case "cc":
+        this.navCtrl.push(CcListPage, option);
+        break;
       case "ew": 
         this.navCtrl.push(EwListPage, option);
         break;
