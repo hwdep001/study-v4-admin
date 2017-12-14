@@ -43,7 +43,7 @@ export class WordUtil {
         return true;
     }
 
-    private static getNullWord(): Word {
+    public static getNullWord(): Word {
         let word = new Word(); 
         word.num = null;
         word.que = null;
@@ -66,7 +66,7 @@ export class WordUtil {
         return word;
     }
 
-    private static getNullObject(): object {
+    public static getNullObject(): object {
         let result = {};
         const nullWord = this.getNullWord();
         Object.keys(nullWord).map(key => result[key] = nullWord[key]);

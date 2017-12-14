@@ -8,5 +8,12 @@
 </ion-header>
   
 <ion-content padding>
-    <button ion-button block (click)="clickCreateBtn()" >Create</button>
+    <button ion-button block (click)="fileByEw.click()" >이동기 파일 분할</button>
+    <input #fileByEw type="file" multiple="false" (change)="splitFileByEw($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLec()" >이동기 Category Lecture 생성</button>
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+
+    <button ion-button block (click)="fileByLSJ.click()" >이선재 파일 분할</button>
+    <input #fileByLSJ type="file" multiple="false" (change)="splitFileByLSJ($event)" style="display: none"/>
 </ion-content>
