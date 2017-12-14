@@ -5,12 +5,12 @@ import * as firebase from 'firebase/app';
 
 import { CommonService } from './../../../providers/common-service';
 import { FileService } from './../../../providers/file-service';
+import { WordUtil } from './../../../utils/wordUtil';
 
 import { Subject } from './../../../models/Subject';
 import { Category } from './../../../models/Category';
 import { Lecture } from './../../../models/Lecture';
 import { Word } from './../../../models/Word';
-import { EwWord } from './../../../models/EwWord';
 
 @Component({
   selector: 'page-ewList',
@@ -28,6 +28,7 @@ export class EwListPage {
   cat: Category;
   lec: Lecture;
   words: Array<Word>;
+  newWord: Word = new Word();
 
   wordsMap: Map<string, Word>;
   words_: Array<Word>;
@@ -63,7 +64,7 @@ export class EwListPage {
 
     return this.wordsRef.orderBy("num").get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
-        let word = doc.data();
+        let word: Word = WordUtil.object2Word(doc.data());
         word.id = doc.id;
         words.push(word);
       });
@@ -82,27 +83,22 @@ export class EwListPage {
     this.wordsMap = map;
   }
 
-  addWord(que, me1, me2, me3, me4, me5, me6): void {
-    if(que.isEmpty()) {
+  addWord(): void {
+    if(this.newWord.que.isEmpty()) {
         return;
     }
 
     const loader = this.cmn_.getLoader(null, null);
     loader.present();
 
-    this.wordsRef.where("que", "==", que).get().then(querySnapshot => {
+    this.wordsRef.where("que", "==", this.newWord.que).get().then(querySnapshot => {
         if(querySnapshot.size > 0) {
           this.cmn_.Toast.present("top", "단어가 중복되었습니다.", "toast-fail");
         } else {
-          let w = Word.getWordByEw(new EwWord(que, me1, me2, me3, me4, me5, me6));
-          return this.wordsRef.add({
-            num: this.words.length+1,
-            que: w.que,
-            me1: w.me1, me2: w.me2, me3: w.me3, me4: w.me4, me5: w.me5, me6: w.me6,
-            me7: w.me7, me8: w.me8, me9: w.me9, me10: w.me10, me11: w.me11,
-            me12: w.me12, me13: w.me13, syn: w.syn, ant: w.ant
-        }).then( () => {
-            this.cmn_.Toast.present("top", que + " - 등록되었습니다.", "toast-success");
+          this.newWord.num = this.words.length+1;
+
+          return this.wordsRef.add(WordUtil.word2Object(this.newWord)).then( () => {
+            this.cmn_.Toast.present("top", this.newWord.que + " - 등록되었습니다.", "toast-success");
             return this.updateLecVersion();
           });
         }
@@ -147,7 +143,7 @@ export class EwListPage {
     this.cmn_.Alert.confirm("저장하시겠습니까?").then(yes => {
 
       if(!this.checkSave()) {
-        this.cmn_.Alert.alert("이름은 필수 입력 사항입니다.");
+        this.cmn_.Alert.alert("Word - 필수 입력 사항입니다.");
         return;
       }
 
@@ -197,11 +193,7 @@ export class EwListPage {
 
   download() {
     const fileName = this.cat.name + "_" + this.lec.name + ".xlsx";
-    let datas = new Array<Array<any>>();
-
-    this.words.forEach(word => {
-      datas.push(this.wordToData(word));
-    });
+    let datas = WordUtil.word2ExcelData(this.sub.id, this.words);
 
     this.file_.export(fileName, datas);
   }
@@ -212,9 +204,7 @@ export class EwListPage {
             
     if(dt.files.length == 1) {
       const datas = await this.file_.uploadExcel(dt.files[0]);
-      datas.forEach(data => {
-        this.words_.push(this.dataToWord(data));
-      })
+      this.words_.pushArray(WordUtil.excelData2Word(this.sub.id, datas));
     } else {
       // this.words_ = [];
       // this.fileName = null;
@@ -235,48 +225,13 @@ export class EwListPage {
     for(let word_ of this.words_) {
       
       word_.num = i;
-      word_.que = word_.que == null ? word_.que : word_.que.trimToNull();
-      word_.me1  = word_.me1  == null ? word_.me1  : word_.me1.trimToNull();
-      word_.me2  = word_.me2  == null ? word_.me2  : word_.me2.trimToNull();
-      word_.me3  = word_.me3  == null ? word_.me3  : word_.me3.trimToNull();
-      word_.me4  = word_.me4  == null ? word_.me4  : word_.me4.trimToNull();
-      word_.me5  = word_.me5  == null ? word_.me5  : word_.me5.trimToNull();
-      word_.me6  = word_.me6  == null ? word_.me6  : word_.me6.trimToNull();
-      word_.me7  = word_.me7  == null ? word_.me7  : word_.me7.trimToNull();
-      word_.me8  = word_.me8  == null ? word_.me8  : word_.me8.trimToNull();
-      word_.me9  = word_.me9  == null ? word_.me9  : word_.me9.trimToNull();
-      word_.me10 = word_.me10 == null ? word_.me10 : word_.me10.trimToNull();
-      word_.me11 = word_.me11 == null ? word_.me11 : word_.me11.trimToNull();
-      word_.me12 = word_.me12 == null ? word_.me12 : word_.me12.trimToNull();
-      word_.me13 = word_.me13 == null ? word_.me13 : word_.me13.trimToNull();
-      word_.syn = word_.syn == null ? word_.syn : word_.syn.trimToNull();
-      word_.ant = word_.ant == null ? word_.ant : word_.ant.trimToNull();
-      
-      const wordObject: object = {
-        num: word_.num,
-        que: word_.que,
-        me1: word_.me1, 
-        me2: word_.me2, 
-        me3: word_.me3, 
-        me4: word_.me4, 
-        me5: word_.me5, 
-        me6: word_.me6,
-        me7: word_.me7, 
-        me8: word_.me8, 
-        me9: word_.me9, 
-        me10: word_.me10, 
-        me11: word_.me11,
-        me12: word_.me12, 
-        me13: word_.me13, 
-        syn: word_.syn, 
-        ant: word_.ant
-      };
+      const wordObject: object = WordUtil.word2Object(word_);
       
       if(word_.id == null) {
         pros.push(this.wordsRef.add(wordObject));
       } else {
         const word = this.wordsMap.get(word_.id);
-        if(!Word.equals(word, word_)) {
+        if(!WordUtil.equals(word, wordObject)) {
           pros.push(this.wordsRef.doc(word.id).update(wordObject));
         }
       }
@@ -303,44 +258,5 @@ export class EwListPage {
     let element = this.words_[indexes.from];
     this.words_.splice(indexes.from, 1);
     this.words_.splice(indexes.to, 0, element);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-
-  dataToWord(data: Array<any>): Word {
-    let word = new Word();
-
-    word.que = data[0] == undefined? null: data[0];
-    word.me1 = data[1] == undefined? null: data[1];
-    word.me2 = data[2] == undefined? null: data[2];
-    word.me3 = data[3] == undefined? null: data[3];
-    word.me4 = data[4] == undefined? null: data[4];
-    word.me5 = data[5] == undefined? null: data[5];
-    word.me6 = data[6] == undefined? null: data[6];
-    word.me7 = null;
-    word.me8 = null;
-    word.me9 = null;
-    word.me10 = null;
-    word.me11 = null;
-    word.me12 = null;
-    word.me13 = null;
-    word.syn = null;
-    word.ant = null;
-
-    return word;
-  }
-
-  wordToData(word: Word): Array<any> {
-    let data = new Array<any>();
-
-    data.push(word.que);
-    data.push(word.me1);
-    data.push(word.me2);
-    data.push(word.me3);
-    data.push(word.me4);
-    data.push(word.me5);
-    data.push(word.me6);
-
-    return data;
   }
 }

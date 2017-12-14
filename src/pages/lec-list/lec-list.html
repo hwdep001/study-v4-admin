@@ -137,7 +137,7 @@
 
   <ion-list class="ilist-item" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderLecs($event)">
     <ion-item *ngFor="let lec of lecs_; let i = index;">
-      {{lec.name}}
+        {{i+1}}. {{lec.name}}
     </ion-item>
   </ion-list>
 
