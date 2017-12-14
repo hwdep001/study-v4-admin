@@ -45,51 +45,63 @@
     <ion-list class="ilist-add" *ngIf="!isEdit && !isOrder">
       <ion-grid>
         <ion-row>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.que" placeholder="chengyu" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me1" placeholder="content" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me2" placeholder="content1" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me3" placeholder="content2" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me4" placeholder="content3" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me5" placeholder="content4" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me6" placeholder="content5" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me7" placeholder="content6" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me8" placeholder="description" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me9" placeholder="synonym" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-8>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.me10" placeholder="antonym" 
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.que" placeholder="meaning1" 
               (keyup.enter)="addWord()"></ion-input></ion-item>
           </ion-col>
           <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me1" placeholder="meaning2" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me2" placeholder="meaning3" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me3" placeholder="meaning4" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me4" placeholder="meaning5" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me5" placeholder="meaning6" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me6" placeholder="meaning7" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me7" placeholder="word" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me8" placeholder="example1" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me9" placeholder="example2" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me10" placeholder="example3" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me11" placeholder="example4" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me12" placeholder="example5" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.me13" placeholder="example6" 
+              (keyup.enter)="addWord()"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-4>
             <button ion-button item-right (click)="addWord()" >Add</button>
           </ion-col>
         </ion-row>
@@ -99,71 +111,86 @@
     <ion-list class="ilist-row" *ngIf="!isOrder">
       
       <ion-row class="row-header">
-        <ion-col col-8><ion-item><ion-label>chengyu</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content1</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content2</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content3</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content4</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content5</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>content6</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>description</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>synonym</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>antonym</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning1</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning2</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning3</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning4</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning5</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning6</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>meaning7</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>word</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example1</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example2</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example3</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example4</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example5</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>example6</ion-label></ion-item></ion-col>
       </ion-row>
 
       <ng-container *ngIf="!isEdit" >
       <ion-row class="row-list" *ngFor="let word of words">
-        <ion-col col-8><ion-item><ion-label>{{word.que}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me1}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me2}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me3}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me4}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me5}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me6}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me7}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me8}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me9}}</ion-label></ion-item></ion-col>
-        <ion-col col-8><ion-item><ion-label>{{word.me10}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.que}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me1}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me2}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me3}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me4}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me5}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me6}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me7}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me8}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me9}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me10}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me11}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me12}}</ion-label></ion-item></ion-col>
+        <ion-col col-6><ion-item><ion-label>{{word.me13}}</ion-label></ion-item></ion-col>
       </ion-row>
       </ng-container>
 
       <ng-container *ngIf="isEdit" >
       <ion-row class="row-list" *ngFor="let word of words_; let i = index;">
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.que"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me1"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me2"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me3"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me4"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me5"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me6"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me7"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me8"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me9"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-6>
           <ion-item><ion-input type="text" [(ngModel)]="word.me10"></ion-input></ion-item>
         </ion-col>
         <ion-col col-6>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me11"></ion-input></ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me12"></ion-input></ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me13"></ion-input></ion-item>
+        </ion-col>
+        <ion-col col-4>
           <ion-item class="item-trash">
             <ion-buttons (click)="trashWord(i, word)">
               <button ion-button clear icon-only color="danger">

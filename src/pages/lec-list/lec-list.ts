@@ -10,6 +10,8 @@ import { Subject } from './../../models/Subject';
 import { Category } from './../../models/Category';
 import { Lecture } from './../../models/Lecture';
 
+import { SpsllwListPage } from './../word-list/spsllw-list/spsllw-list';
+import { KrListPage } from './../word-list/kr-list/kr-list';
 import { CcListPage } from './../word-list/cc-list/cc-list';
 import { C4ListPage } from './../word-list/c4-list/c4-list';
 import { EwListPage } from './../word-list/ew-list/ew-list';
@@ -128,10 +130,10 @@ export class LecListPage {
       case "sp":
       case "sl":
       case "lw":
-        // this.navCtrl.push(LwListPage, option);
+        this.navCtrl.push(SpsllwListPage, option);
         break;
       case "kr":
-        // this.navCtrl.push(KrListPage, option);
+        this.navCtrl.push(KrListPage, option);
         break;
       case "cc":
         this.navCtrl.push(CcListPage, option);
