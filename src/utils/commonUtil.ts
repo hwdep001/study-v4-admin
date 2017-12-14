@@ -1,3 +1,5 @@
+import { User } from './../models/User';
+
 declare global {
     interface Date {
         yyMMdd(): string;
@@ -112,6 +114,23 @@ export class CommonUtil {
             }
         }
 
+        return result;
+    }
+
+    public static object2User(data: any): User {
+        let result = new User();
+
+        result.uid = null;
+        result.email = null;
+        result.displayName = null;
+        result.photoURL = null;
+        result.createDate = null;
+        result.lastDate = null;
+        result.isAuth = false;
+        result.isDel = false;
+        result.ad = false;
+        
+        Object.keys(result).map(key => result[key] = data[key]);
         return result;
     }
 }

@@ -1,0 +1,20 @@
+page-userDetail {
+    
+        .icontent {
+    
+        .ilist {
+
+            .iitem {
+                
+                .auth-color-green {
+                    color: map-get($colors, secondary);
+                }
+
+                .auth-color-red {
+                    color: map-get($colors, danger);
+                }
+            }
+        }
+    }
+}
+    

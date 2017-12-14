@@ -32,6 +32,9 @@ import { KrListPage } from './../pages/word-list/kr-list/kr-list';
 import { CcListPage } from './../pages/word-list/cc-list/cc-list';
 import { C4ListPage } from './../pages/word-list/c4-list/c4-list';
 import { EwListPage } from './../pages/word-list/ew-list/ew-list';
+import { UserMngPage } from './../pages/user-mng/user-mng';
+  import { UserPhotoPage } from './../pages/user-mng/photo/user-photo';
+  import { UserDetailPage } from './../pages/user-mng/detail/user-detail';
 import { SettingPage } from './../pages/setting/setting';
 
   
@@ -49,6 +52,9 @@ import { SettingPage } from './../pages/setting/setting';
     CcListPage,
     C4ListPage,
     EwListPage,
+    UserMngPage,
+      UserPhotoPage,
+      UserDetailPage,
     SettingPage
   ],
   imports: [
@@ -73,6 +79,9 @@ import { SettingPage } from './../pages/setting/setting';
     CcListPage,
     C4ListPage,
     EwListPage,
+    UserMngPage,
+      UserPhotoPage,
+      UserDetailPage,
     SettingPage
   ],
   providers: [
