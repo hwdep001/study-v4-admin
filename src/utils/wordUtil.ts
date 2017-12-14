@@ -90,12 +90,147 @@ export class WordUtil {
         let result: Array<Word>;
         
         switch(subId) {
+            case "sp":
+            case "sl":
+            case "lw":
+                result = this.excelData2WordOfSpSlLw(datas);
+                break;
+            case "kr":
+                result = this.excelData2WordOfKr(datas);
+                break;
+            case "cc":
+                result = this.excelData2WordOfCc(datas);
+                break;
+            case "c4":
+                result = this.excelData2WordOfC4(datas);
+                break;
             case "ew":
                 result = this.excelData2WordOfEw(datas);
                 break;
         }
     
         return result;
+    }
+
+    private static excelData2WordOfSpSlLw(datas: Array<Array<any>>): Array<Word> {
+        let words = new Array<Word>();
+        let word: Word;
+        let headerFlag = true;
+
+        datas.forEach(data => {
+            if(!headerFlag) {
+                word = this.getNullWord();
+                word.que = data[0] == undefined? null: data[0];
+                word.me1 = data[1] == undefined? null: data[1];
+                word.me2 = data[2] == undefined? null: data[2];
+                word.me3 = data[3] == undefined? null: data[3];
+                if(word.que != null) {
+                    words.push(word);
+                }
+            } else {
+                headerFlag = false;
+            }
+        });
+
+        return words;
+    }
+
+    private static excelData2WordOfKr(datas: Array<Array<any>>): Array<Word> {
+        let words = new Array<Word>();
+        let word: Word;
+        let headerFlag = true;
+
+        datas.forEach(data => {
+            if(!headerFlag) {
+                word = this.getNullWord();
+                word.que = data[0] == undefined? null: data[0];
+                word.me1 = data[1] == undefined? null: data[1];
+                word.me2 = data[2] == undefined? null: data[2];
+                word.me3 = data[3] == undefined? null: data[3];
+                word.me4 = data[4] == undefined? null: data[4];
+                word.me5 = data[5] == undefined? null: data[5];
+                word.me6 = data[6] == undefined? null: data[6];
+                word.me7 = data[7] == undefined? null: data[7];
+                word.me8 = data[8] == undefined? null: data[8];
+                word.me9 = data[9] == undefined? null: data[9];
+                word.me10 = data[10] == undefined? null: data[10];
+                word.me11 = data[11] == undefined? null: data[11];
+                word.me12 = data[12] == undefined? null: data[12];
+                word.me13 = data[13] == undefined? null: data[13];
+                if(word.que != null) {
+                    words.push(word);
+                }
+            } else {
+                headerFlag = false;
+            }
+        });
+
+        return words;
+    }
+
+    private static excelData2WordOfCc(datas: Array<Array<any>>): Array<Word> {
+        let words = new Array<Word>();
+        let word: Word;
+        let headerFlag = true;
+
+        datas.forEach(data => {
+            if(!headerFlag) {
+                word = this.getNullWord();
+                word.que = data[0] == undefined? null: data[0];
+                word.me1 = data[1] == undefined? null: data[1];
+                word.me2 = data[2] == undefined? null: data[2];
+                word.me3 = data[3] == undefined? null: data[3];
+                word.me4 = data[4] == undefined? null: data[4];
+                word.me5 = data[5] == undefined? null: data[5];
+                word.me6 = data[6] == undefined? null: data[6];
+                word.me7 = data[7] == undefined? null: data[7];
+                word.me8 = data[8] == undefined? null: data[8];
+                word.me9 = data[9] == undefined? null: data[9];
+                word.me10 = data[10] == undefined? null: data[10];
+                word.me11 = data[11] == undefined? null: data[11];
+                word.me12 = data[12] == undefined? null: data[12];
+                word.me13 = data[13] == undefined? null: data[13];
+                word.syn = data[14] == undefined? null: data[14];
+                word.ant = data[15] == undefined? null: data[15];
+                if(word.que != null) {
+                    words.push(word);
+                }
+            } else {
+                headerFlag = false;
+            }
+        });
+
+        return words;
+    }
+
+    private static excelData2WordOfC4(datas: Array<Array<any>>): Array<Word> {
+        let words = new Array<Word>();
+        let word: Word;
+        let headerFlag = true;
+
+        datas.forEach(data => {
+            if(!headerFlag) {
+                word = this.getNullWord();
+                word.que = data[0] == undefined? null: data[0];
+                word.me1 = data[1] == undefined? null: data[1];
+                word.me2 = data[2] == undefined? null: data[2];
+                word.me3 = data[3] == undefined? null: data[3];
+                word.me4 = data[4] == undefined? null: data[4];
+                word.me5 = data[5] == undefined? null: data[5];
+                word.me6 = data[6] == undefined? null: data[6];
+                word.me7 = data[7] == undefined? null: data[7];
+                word.me8 = data[8] == undefined? null: data[8];
+                word.me9 = data[9] == undefined? null: data[9];
+                word.me10 = data[10] == undefined? null: data[10];
+                if(word.que != null) {
+                    words.push(word);
+                }
+            } else {
+                headerFlag = false;
+            }
+        });
+
+        return words;
     }
 
     private static excelData2WordOfEw(datas: Array<Array<any>>): Array<Word> {
@@ -113,7 +248,9 @@ export class WordUtil {
                 word.me4 = data[4] == undefined? null: data[4];
                 word.me5 = data[5] == undefined? null: data[5];
                 word.me6 = data[6] == undefined? null: data[6];
-                words.push(word);
+                if(word.que != null) {
+                    words.push(word);
+                }
             } else {
                 headerFlag = false;
             }
@@ -128,12 +265,177 @@ export class WordUtil {
         let result: Array<Array<any>>;
         
         switch(subId) {
+            case "sp":
+            case "sl":
+            case "lw":
+                result = this.word2ExcelDataOfSpSlLw(words);
+                break;
+            case "kr":
+                result = this.word2ExcelDataOfKr(words);
+                break;
+            case "cc":
+                result = this.word2ExcelDataOfCc(words);
+                break;
+            case "c4":
+                result = this.word2ExcelDataOfC4(words);
+                break;
             case "ew":
                 result = this.word2ExcelDataOfEw(words);
                 break;
         }
     
         return result;
+    }
+
+    private static word2ExcelDataOfSpSlLw(words: Array<Word>): Array<Array<any>> {
+        let datas = new Array<Array<any>>();
+        let data: Array<any>;
+        let header = new Array<any>();
+        header.push("question");
+        header.push("choice1");
+        header.push("choice2");
+        header.push("answer");
+        datas.push(header);
+
+        words.forEach(word => {
+            data = new Array<any>();
+            
+            data.push(word.que);
+            data.push(word.me1);
+            data.push(word.me2);
+            data.push(word.me3);
+            data.push(word.me4);
+            datas.push(data);
+        });
+
+        return datas;
+    }
+
+    private static word2ExcelDataOfKr(words: Array<Word>): Array<Array<any>> {
+        let datas = new Array<Array<any>>();
+        let data: Array<any>;
+        let header = new Array<any>();
+        header.push("meaning1");
+        header.push("meaning2");
+        header.push("meaning3");
+        header.push("meaning4");
+        header.push("meaning5");
+        header.push("meaning6");
+        header.push("meaning7");
+        header.push("word");
+        header.push("example1");
+        header.push("example2");
+        header.push("example3");
+        header.push("example4");
+        header.push("example5");
+        header.push("example6");
+        datas.push(header);
+
+        words.forEach(word => {
+            data = new Array<any>();
+            
+            data.push(word.que);
+            data.push(word.me1);
+            data.push(word.me2);
+            data.push(word.me3);
+            data.push(word.me4);
+            data.push(word.me5);
+            data.push(word.me6);
+            data.push(word.me7);
+            data.push(word.me8);
+            data.push(word.me9);
+            data.push(word.me10);
+            data.push(word.me11);
+            data.push(word.me12);
+            data.push(word.me13);
+            datas.push(data);
+        });
+
+        return datas;
+    }
+
+    private static word2ExcelDataOfCc(words: Array<Word>): Array<Array<any>> {
+        let datas = new Array<Array<any>>();
+        let data: Array<any>;
+        let header = new Array<any>();
+        header.push("word");
+        header.push("content");
+        header.push("content1");
+        header.push("content2");
+        header.push("content3");
+        header.push("content4");
+        header.push("meaning1");
+        header.push("meaning2");
+        header.push("meaning3");
+        header.push("meaning4");
+        header.push("example1");
+        header.push("example2");
+        header.push("example3");
+        header.push("example4");
+        header.push("synonym");
+        header.push("antonym");
+        datas.push(header);
+
+        words.forEach(word => {
+            data = new Array<any>();
+            
+            data.push(word.que);
+            data.push(word.me1);
+            data.push(word.me2);
+            data.push(word.me3);
+            data.push(word.me4);
+            data.push(word.me5);
+            data.push(word.me6);
+            data.push(word.me7);
+            data.push(word.me8);
+            data.push(word.me9);
+            data.push(word.me10);
+            data.push(word.me11);
+            data.push(word.me12);
+            data.push(word.me13);
+            data.push(word.syn);
+            data.push(word.ant);
+            datas.push(data);
+        });
+
+        return datas;
+    }
+
+    private static word2ExcelDataOfC4(words: Array<Word>): Array<Array<any>> {
+        let datas = new Array<Array<any>>();
+        let data: Array<any>;
+        let header = new Array<any>();
+        header.push("chengyu");
+        header.push("content");
+        header.push("content1");
+        header.push("content2");
+        header.push("content3");
+        header.push("content4");
+        header.push("content5");
+        header.push("content6");
+        header.push("description");
+        header.push("description_synonym");
+        header.push("description_antonym");
+        datas.push(header);
+
+        words.forEach(word => {
+            data = new Array<any>();
+            
+            data.push(word.que);
+            data.push(word.me1);
+            data.push(word.me2);
+            data.push(word.me3);
+            data.push(word.me4);
+            data.push(word.me5);
+            data.push(word.me6);
+            data.push(word.me7);
+            data.push(word.me8);
+            data.push(word.me9);
+            data.push(word.me10);
+            datas.push(data);
+        });
+
+        return datas;
     }
 
     private static word2ExcelDataOfEw(words: Array<Word>): Array<Array<any>> {
