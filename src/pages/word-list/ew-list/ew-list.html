@@ -41,210 +41,85 @@
 <ion-content class="icontent">
   <input #file type="file" multiple="false" (change)="onFileChange($event)" style="display: none"/>
 
-  <ion-list class="ilist-add">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #que placeholder="word"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me1 placeholder="meaning type1"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me2 placeholder="meaning value1"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me3 placeholder="meaning type2"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me4 placeholder="meaning value2"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me5 placeholder="example phrase"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-input type="text" #me6 placeholder="example meaning"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-9>
-          <button ion-button item-right (click)="addWord(que.value, 
-              me1.value, me2.value, me3.value, me4.value, me5.value, me6.value)" >
-            Add
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
-
-  <ion-list class="ilist-row" *ngIf="!isOrder">
-
-    <!-- !isEdit -->
-    <ng-container *ngIf="!isEdit" >
+  <ion-scroll scrollX="true" scrollY="true" *ngIf="!isOrder" >
+    <ion-list class="ilist-add" *ngIf="!isEdit && !isOrder">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #que placeholder="word"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me1 placeholder="meaning type1"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me2 placeholder="meaning value1"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me3 placeholder="meaning type2"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me4 placeholder="meaning value2"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me5 placeholder="example phrase"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-13>
+            <ion-item><ion-input type="text" #me6 placeholder="example meaning"></ion-input></ion-item>
+          </ion-col>
+          <ion-col col-9>
+            <button ion-button item-right (click)="addWord(que.value, 
+                me1.value, me2.value, me3.value, me4.value, me5.value, me6.value)" >Add</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  
+    <ion-list class="ilist-row" *ngIf="!isOrder">
+      
       <ion-row class="row-header">
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>word</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m type1</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m value1</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m type2</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m value2</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>ex phrase</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>ex meaning</ion-label>
-          </ion-item>
-        </ion-col>
+        <ion-col col-13><ion-item><ion-label>word</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>meaning type1</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>meaning value1</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>meaning type2</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>meaning value2</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>example phrase</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>example meaning</ion-label></ion-item></ion-col>
       </ion-row>
 
+      <ng-container *ngIf="!isEdit" >
       <ion-row class="row-list" *ngFor="let word of words">
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.que}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me1}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me2}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me3}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me4}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me5}}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>{{word.me6}}</ion-label>
-          </ion-item>
-        </ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.que}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me1}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me2}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me3}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me4}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me5}}</ion-label></ion-item></ion-col>
+        <ion-col col-13><ion-item><ion-label>{{word.me6}}</ion-label></ion-item></ion-col>
       </ion-row>
-    </ng-container>
+      </ng-container>
 
-    <!-- isEdit -->
-    <ng-container *ngIf="isEdit" >
-      <ion-row class="row-header">
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>word</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m type1</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m value1</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m type2</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>m value2</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>ex phrase</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col col-13>
-          <ion-item>
-            <ion-label>ex meaning</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
+      <ng-container *ngIf="isEdit" >
       <ion-row class="row-list" *ngFor="let word of words_; let i = index;">
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.que"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.que"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me1"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me1"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me2"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me2"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me3"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me3"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me4"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me4"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me5"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me5"></ion-input></ion-item>
         </ion-col>
         <ion-col col-13>
-          <ion-item >
-            <ion-input type="text" [(ngModel)]="word.me6"></ion-input>
-          </ion-item>
+          <ion-item><ion-input type="text" [(ngModel)]="word.me6"></ion-input></ion-item>
         </ion-col>
         <ion-col col-9>
           <ion-item class="item-trash">
@@ -256,9 +131,10 @@
           </ion-item>
         </ion-col>
       </ion-row>
-    </ng-container>
+      </ng-container>
 
-  </ion-list>
+    </ion-list>
+  </ion-scroll>
 
   <ion-list class="ilist-item" *ngIf="isOrder" reorder="true" (ionItemReorder)="reorderWords($event)">
     <ion-item *ngFor="let word of words_; let i = index;">

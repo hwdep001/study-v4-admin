@@ -159,10 +159,12 @@ export class EwListPage {
   
       this.saveWords()
       .then(any => {
-        this.getWords();
-        this.isEdit = false;
-        this.isOrder = false;
-        loader.dismiss();
+        this.getWords().then(any => {
+          loader.dismiss();
+          this.isEdit = false;
+          this.isOrder = false;
+        }).catch(err => loader.dismiss());
+        
       }).catch(err => {
         console.log(err);
         loader.dismiss();

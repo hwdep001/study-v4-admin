@@ -24,13 +24,26 @@ page-ewList {
         }
     }
 
+    
+
+    ion-scroll {
+        white-space: nowrap;
+        height: 100%;
+    }
+
+    ion-row {
+        flex-wrap: nowrap;
+    }
+
     .icontent {
 
         .ilist-add {
+            width: 1500px;
             background-color: map-get($colors, add-button);
         }
 
         .ilist-row {
+            width: 1500px;
 
             .row-header {
                 ion-item {
