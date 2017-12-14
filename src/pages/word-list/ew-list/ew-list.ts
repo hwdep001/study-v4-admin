@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 import * as firebase from 'firebase/app';
 
 import { CommonService } from './../../../providers/common-service';
 import { FileService } from './../../../providers/file-service';
 
-import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
 import { Subject } from './../../../models/Subject';
 import { Category } from './../../../models/Category';
 import { Lecture } from './../../../models/Lecture';
@@ -38,7 +36,6 @@ export class EwListPage {
   constructor(
     public navCtrl: NavController,
     private param: NavParams,
-    private toastCtrl: ToastController,
     private cmn_: CommonService,
     private file_: FileService
   ) {
@@ -95,7 +92,7 @@ export class EwListPage {
 
     this.wordsRef.where("que", "==", que).get().then(querySnapshot => {
         if(querySnapshot.size > 0) {
-          this.presentToast("top", "단어가 중복되었습니다.", null);
+          this.cmn_.Toast.present("top", "단어가 중복되었습니다.", "toast-fail");
         } else {
           let w = Word.getWordByEw(new EwWord(que, me1, me2, me3, me4, me5, me6));
           return this.wordsRef.add({
@@ -105,7 +102,7 @@ export class EwListPage {
             me7: w.me7, me8: w.me8, me9: w.me9, me10: w.me10, me11: w.me11,
             me12: w.me12, me13: w.me13, syn: w.syn, ant: w.ant
         }).then( () => {
-            this.presentToast("top", que + " - 등록되었습니다.", null);
+            this.cmn_.Toast.present("top", que + " - 등록되었습니다.", "toast-success");
             return this.updateLecVersion();
           });
         }
@@ -345,18 +342,5 @@ export class EwListPage {
     data.push(word.me6);
 
     return data;
-  }
-
-  presentToast(position: string, message: string, cssClass: string, duration?: number): void {
-    let options: ToastOptions = {
-      message: message,
-      position: position,
-      duration: (duration == null) ? 2500 : duration
-    }
-    if(cssClass != null) {
-      options.cssClass = cssClass;
-    }
-
-    this.toastCtrl.create(options).present();
   }
 }

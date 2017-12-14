@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 import { Loading } from 'ionic-angular/components/loading/loading';
+import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
 import { User } from './../models/User';
 
 @Injectable()
@@ -10,7 +12,8 @@ export class CommonService {
 
     constructor(
         private loadingCtrl: LoadingController,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController
     ) {
     
     }
@@ -127,6 +130,26 @@ export class CommonService {
           });
     
           alert.present();
+        }
+    }
+
+    public Toast = {
+        present: (
+            position: string, 
+            message: string, 
+            cssClass: string, 
+            duration?: number) => {
+
+                let options: ToastOptions = {
+                    message: message,
+                    position: position,
+                    duration: (duration == null) ? 2500 : duration
+                }
+                if(cssClass != null) {
+                options.cssClass = cssClass;
+                }
+
+                this.toastCtrl.create(options).present();
         }
     }
 }

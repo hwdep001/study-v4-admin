@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 import * as firebase from 'firebase/app';
 
 import { CommonUtil } from '../../utils/commonUtil';
 import { CommonService } from './../../providers/common-service';
 
-import { ToastOptions } from 'ionic-angular/components/toast/toast-options';
 import { Subject } from './../../models/Subject';
 import { Category } from './../../models/Category';
 import { Lecture } from './../../models/Lecture';
@@ -37,7 +35,6 @@ export class LecListPage {
   constructor(
     public navCtrl: NavController,
     private param: NavParams,
-    private toastCtrl: ToastController,
     private cmn_: CommonService
   ) {
     this.initData();
@@ -91,14 +88,14 @@ export class LecListPage {
 
     this.lecsRef.where("name", "==", newLecName).get().then(querySnapshot => {
         if(querySnapshot.size > 0) {
-          this.presentToast("top", "이름이 중복되었습니다.", null);
+          this.cmn_.Toast.present("top", "이름이 중복되었습니다.", "toast-fail");
         } else {
             return this.lecsRef.add({
                 name: newLecName,
                 num: this.lecs.length+1,
                 version: 0
             }).then( () => {
-              this.presentToast("top", newLecName + " - 등록되었습니다.", null);
+              this.cmn_.Toast.present("top", newLecName + " - 등록되었습니다.", "toast-success");
               return this.updateCatVersion();
             });
         }
@@ -269,20 +266,5 @@ export class LecListPage {
     let element = this.lecs_[indexes.from];
     this.lecs_.splice(indexes.from, 1);
     this.lecs_.splice(indexes.to, 0, element);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-
-  presentToast(position: string, message: string, cssClass: string, duration?: number): void {
-    let options: ToastOptions = {
-      message: message,
-      position: position,
-      duration: (duration == null) ? 2500 : duration
-    }
-    if(cssClass != null) {
-      options.cssClass = cssClass;
-    }
-
-    this.toastCtrl.create(options).present();
   }
 }
