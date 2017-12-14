@@ -1,4 +1,3 @@
-import { EwWord } from './EwWord';
 export class Word {
 
     id?: string;
