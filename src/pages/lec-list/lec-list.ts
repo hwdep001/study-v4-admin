@@ -11,6 +11,7 @@ import { Category } from './../../models/Category';
 import { Lecture } from './../../models/Lecture';
 
 import { CcListPage } from './../word-list/cc-list/cc-list';
+import { C4ListPage } from './../word-list/c4-list/c4-list';
 import { EwListPage } from './../word-list/ew-list/ew-list';
 
 @Component({
@@ -124,8 +125,19 @@ export class LecListPage {
     }
 
     switch(this.sub.id) {
+      case "sp":
+      case "sl":
+      case "lw":
+        // this.navCtrl.push(LwListPage, option);
+        break;
+      case "kr":
+        // this.navCtrl.push(KrListPage, option);
+        break;
       case "cc":
         this.navCtrl.push(CcListPage, option);
+        break;
+      case "c4":
+        this.navCtrl.push(C4ListPage, option);
         break;
       case "ew": 
         this.navCtrl.push(EwListPage, option);

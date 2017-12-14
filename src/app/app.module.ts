@@ -28,6 +28,7 @@ import { TestPage } from './../pages/test/test';
 import { CatListPage } from './../pages/cat-list/cat-list';
 import { LecListPage } from './../pages/lec-list/lec-list';
 import { CcListPage } from './../pages/word-list/cc-list/cc-list';
+import { C4ListPage } from './../pages/word-list/c4-list/c4-list';
 import { EwListPage } from './../pages/word-list/ew-list/ew-list';
 import { SettingPage } from './../pages/setting/setting';
 
@@ -42,6 +43,7 @@ import { SettingPage } from './../pages/setting/setting';
     CatListPage,
     LecListPage,
     CcListPage,
+    C4ListPage,
     EwListPage,
     SettingPage
   ],
@@ -63,6 +65,7 @@ import { SettingPage } from './../pages/setting/setting';
     CatListPage,
     LecListPage,
     CcListPage,
+    C4ListPage,
     EwListPage,
     SettingPage
   ],

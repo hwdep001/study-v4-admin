@@ -1,0 +1,65 @@
+page-c4List {
+    .nav-btn {
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+
+    .add-navi-gird {
+        padding: 0 0 0 0px; 
+        height: 44px; 
+        
+        ion-row {
+            ion-col {
+                padding: 0px;
+                
+                ion-item {
+                    padding: 0px;
+                    background-color: map-get($colors, add-button);
+
+                    ion-input {
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    
+
+    ion-scroll {
+        white-space: nowrap;
+        height: 100%;
+    }
+
+    ion-row {
+        flex-wrap: nowrap;
+    }
+
+    .icontent {
+
+        .ilist-add {
+            width: 3500px;
+            background-color: map-get($colors, add-button);
+        }
+
+        .ilist-row {
+            width: 3500px;
+
+            .row-header {
+                ion-item {
+                    text-align: center;
+                }
+            }
+            
+            .row-list {
+
+                .item-trash {
+                    text-align: center;
+                    ion-label {
+                        margin: 0px;
+                    }
+                }
+            }
+        }
+    }    
+}
