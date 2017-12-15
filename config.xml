@@ -101,4 +101,5 @@
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
+    <plugin name="cordova-plugin-advanced-http" spec="^1.9.0" />
 </widget>

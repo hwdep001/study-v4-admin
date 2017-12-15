@@ -8,12 +8,49 @@
 </ion-header>
   
 <ion-content padding>
-    <button ion-button block (click)="fileByEw.click()" >이동기 파일 분할</button>
+
+    
+    
+    <button ion-button block (click)="fileBySp.click()" >이선재 맞춤법 파일 분할</button>
+    <input #fileBySp type="file" multiple="false" (change)="splitFileBySp($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecBySp()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileBySl.click()" >이선재 표준어 파일 분할</button>
+    <input #fileBySl type="file" multiple="false" (change)="splitFileBySl($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecBySl()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileByLw.click()" >이선재 외래어 파일 분할</button>
+    <input #fileByLw type="file" multiple="false" (change)="splitFileByLw($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecByLw()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileByKr.click()" >이선재 어휘 파일 분할</button>
+    <input #fileByKr type="file" multiple="false" (change)="splitFileByKr($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecByKr()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileByCc.click()" >이선재 한자 파일 분할</button>
+    <input #fileByCc type="file" multiple="false" (change)="splitFileByCc($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecByCc()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileByC4.click()" >이선재 한자성어 파일 분할</button>
+    <input #fileByC4 type="file" multiple="false" (change)="splitFileByC4($event)" style="display: none"/>
+    <button ion-button block (click)="createCatLecByC4()" >Category Lecture 생성</button>
+
+    <br><br>
+
+    <button ion-button block (click)="fileByEw.click()" >이동기 영단어 파일 분할</button>
     <input #fileByEw type="file" multiple="false" (change)="splitFileByEw($event)" style="display: none"/>
-    <button ion-button block (click)="createCatLec()" >이동기 Category Lecture 생성</button>
+    <button ion-button block (click)="createCatLecByEw()" >Category Lecture 생성</button>
 
-    ///////////////////////////////////////////////////////////////////////////////////////
-
-    <button ion-button block (click)="fileByLSJ.click()" >이선재 파일 분할</button>
-    <input #fileByLSJ type="file" multiple="false" (change)="splitFileByLSJ($event)" style="display: none"/>
+    <br><br>
+    
 </ion-content>

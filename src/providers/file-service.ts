@@ -40,6 +40,20 @@ export class FileService {
       reader.readAsBinaryString(file);
     });
   }
+
+  async uploadJson(file: File): Promise<AOA> {
+    return new Promise<AOA>((resolve, reject) => {
+      // let data: AOA = [];
+      
+      /* wire up file reader */
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const data = JSON.parse(e.target.result);
+        resolve(data);
+      };
+      reader.readAsText(file, 'utf-8');
+    });
+  }
   
   export(fileName: string, excelData: Array<Array<any>>, wopts?: XLSX.WritingOptions): void {
     

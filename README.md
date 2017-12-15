@@ -47,3 +47,10 @@ $ npm install @types/file-saver --save-dev
 $ ionic cordova plugin add cordova-plugin-statusbar
 $ npm install --save @ionic-native/status-bar
 ```
+
+### [HTTP] (https://ionicframework.com/docs/native/http/)
+
+```
+$ ionic cordova plugin add cordova-plugin-advanced-http
+$ npm install --save @ionic-native/http
+```
