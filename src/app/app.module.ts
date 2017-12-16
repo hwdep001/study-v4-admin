@@ -25,6 +25,7 @@ import { SigninPage } from './../pages/signin/signin';
 import { HomePage } from './../pages/home/home';
 import { TestPage } from './../pages/test/test';
   import { Tab1Page } from './../pages/test/tab1/tab1';
+  import { Tab2Page } from './../pages/test/tab2/tab2';
 import { CatListPage } from './../pages/cat-list/cat-list';
 import { LecListPage } from './../pages/lec-list/lec-list';
 import { SpsllwListPage } from './../pages/word-list/spsllw-list/spsllw-list';
@@ -36,7 +37,6 @@ import { UserMngPage } from './../pages/user-mng/user-mng';
   import { UserPhotoPage } from './../pages/user-mng/photo/user-photo';
   import { UserDetailPage } from './../pages/user-mng/detail/user-detail';
 import { SettingPage } from './../pages/setting/setting';
-
   
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
+      Tab2Page,
     CatListPage,
     LecListPage,
     SpsllwListPage,
@@ -72,6 +73,7 @@ import { SettingPage } from './../pages/setting/setting';
     HomePage,
     TestPage,
       Tab1Page,
+      Tab2Page,
     CatListPage,
     LecListPage,
     SpsllwListPage,
