@@ -124,6 +124,7 @@ export class WordUtil {
                 word.me1 = data[1] == undefined? null: data[1];
                 word.me2 = data[2] == undefined? null: data[2];
                 word.me3 = data[3] == undefined? null: data[3];
+                word.me4 = data[4] == undefined? null: data[4];
                 if(word.que != null) {
                     words.push(word);
                 }
@@ -295,6 +296,7 @@ export class WordUtil {
         header.push("choice1");
         header.push("choice2");
         header.push("answer");
+        header.push("answer_num");
         datas.push(header);
 
         words.forEach(word => {

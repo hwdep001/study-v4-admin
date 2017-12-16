@@ -76,6 +76,8 @@ export class Tab1Page {
       word.me1  = this.convertData(data['choice1']);
       word.me2  = this.convertData(data['choice2']);
       word.me3  = this.convertData(data['answer']);
+      word.me3  = this.convertData(data['answer']);
+      word.me4  = this.convertData(data['answer_num']);
       if(word.que != null) {
           words.push(word);
       }

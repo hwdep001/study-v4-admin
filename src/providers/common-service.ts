@@ -146,7 +146,7 @@ export class CommonService {
                     duration: (duration == null) ? 2500 : duration
                 }
                 if(cssClass != null) {
-                options.cssClass = cssClass;
+                    options.cssClass = cssClass;
                 }
 
                 this.toastCtrl.create(options).present();
