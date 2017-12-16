@@ -91,18 +91,19 @@ export class SpsllwListPage {
     const loader = this.cmn_.getLoader(null, null);
     loader.present();
 
-    this.wordsRef.where("que", "==", this.newWord.que).get().then(querySnapshot => {
-        if(querySnapshot.size > 0) {
-          this.cmn_.Toast.present("top", "단어가 중복되었습니다.", "toast-fail");
-        } else {
+    // this.wordsRef.where("que", "==", this.newWord.que).get().then(querySnapshot => {
+        // if(querySnapshot.size > 0) {
+        //   this.cmn_.Toast.present("top", "단어가 중복되었습니다.", "toast-fail");
+        // } else {
           this.newWord.num = this.words.length+1;
 
-          return this.wordsRef.add(WordUtil.word2Object(this.newWord)).then( () => {
+          this.wordsRef.add(WordUtil.word2Object(this.newWord)).then( () => {
             this.cmn_.Toast.present("top", this.newWord.que + " - 등록되었습니다.", "toast-success");
             return this.updateLecVersion();
-          });
-        }
-    }).then(any => {
+          })
+        // }
+    // })
+    .then(any => {
       this.getWords()
       .then(any => loader.dismiss())
       .catch(err => loader.dismiss());
