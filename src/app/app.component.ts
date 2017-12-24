@@ -77,7 +77,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.backgroundColorByHexString("#323435");
       this.platform.registerBackButtonAction(() => this.exitApp());
-      this.splashScreen.hide();
       this.savePlatform();
     });
   }
@@ -115,6 +114,7 @@ export class MyApp {
   initializeMenu(fireUser: firebase.User) {
     this.setPages();
 
+    this.splashScreen.hide();
     if(this.cmn_.ad) {
       this.nav.setRoot(HomePage);
     } else {
