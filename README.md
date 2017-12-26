@@ -28,34 +28,34 @@ $ cordova plugin add cordova-plugin-customurlscheme --variable \
   URL_SCHEME=com.firebase.cordova --save
 ```
 
-### [js-xlsx] (https://github.com/SheetJS/js-xlsx)
+## [js-xlsx](https://github.com/SheetJS/js-xlsx)
 
 ```
 $ npm install xlsx
 ```
 
-### [FileSaver.js] (https://github.com/eligrey/FileSaver.js)
+## [FileSaver.js](https://github.com/eligrey/FileSaver.js)
 
 ```
 $ npm install file-saver --save
 $ npm install @types/file-saver --save-dev
 ```
 
-### [Status Bar] (https://ionicframework.com/docs/native/status-bar/)
+## [Status Bar](https://ionicframework.com/docs/native/status-bar/)
 
 ```
 $ ionic cordova plugin add cordova-plugin-statusbar
 $ npm install --save @ionic-native/status-bar
 ```
 
-### [Splash Screen] (https://ionicframework.com/docs/native/splash-screen/)
+## [Splash Screen](https://ionicframework.com/docs/native/splash-screen/)
 
 ```
 $ ionic cordova plugin add cordova-plugin-splashscreen
 $ npm install --save @ionic-native/splash-screen
 ```
 
-### [HTTP] (https://ionicframework.com/docs/native/http/)
+## [HTTP](https://ionicframework.com/docs/native/http/)
 
 ```
 $ ionic cordova plugin add cordova-plugin-advanced-http
